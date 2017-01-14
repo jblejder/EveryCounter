@@ -1,4 +1,4 @@
-package com.project.blejder.everycounter.main;
+package com.project.blejder.everycounter.main.activities;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -11,18 +11,26 @@ import com.project.blejder.everycounter.R;
 import com.project.blejder.everycounter.databinding.MainActivityBinding;
 import com.project.blejder.everycounter.detail.fragments.DetailCounterFragment;
 import com.project.blejder.everycounter.list.fragments.ListCountersFragment;
+import com.project.blejder.everycounter.main.dagger.DaggerMainComponent;
+import com.project.blejder.everycounter.main.dagger.MainComponent;
 import com.project.blejder.everycounter.main.viewmodels.MainViewModel;
+
+import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity {
 
     private MainActivityBinding binding;
 
-    MainViewModel viewModel = new MainViewModel();
+    @Inject
+    MainViewModel viewModel;
+    public MainComponent mainComponent = DaggerMainComponent.create();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.binding = DataBindingUtil.setContentView(this, R.layout.main_activity);
+
+        mainComponent.inject(this);
 
         if (this.viewModel.counters.size() == 0) {
             loadFragment(DetailCounterFragment.newInstance());
@@ -34,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private void loadFragment(Fragment fragment) {
         FragmentManager     fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
+
         ft.replace(this.binding.mainFragmentContainer.getId(), fragment);
         ft.commit();
     }

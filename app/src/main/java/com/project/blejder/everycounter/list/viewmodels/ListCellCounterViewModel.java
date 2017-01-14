@@ -1,4 +1,4 @@
-package com.project.blejder.everycounter.list;
+package com.project.blejder.everycounter.list.viewmodels;
 
 import android.databinding.ObservableField;
 

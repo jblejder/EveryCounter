@@ -1,4 +1,4 @@
-package com.project.blejder.everycounter.list;
+package com.project.blejder.everycounter.list.viewhandlers;
 
 
 public interface ListCellCounterHandler {

@@ -3,6 +3,8 @@ package com.project.blejder.everycounter.list;
 import android.support.v7.widget.RecyclerView;
 
 import com.project.blejder.everycounter.databinding.ListCellCounterBinding;
+import com.project.blejder.everycounter.list.viewhandlers.ListCellCounterHandler;
+import com.project.blejder.everycounter.list.viewmodels.ListCellCounterViewModel;
 
 public class ListCellCounterViewHolder extends RecyclerView.ViewHolder{
     private ListCellCounterBinding binding;

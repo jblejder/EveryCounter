@@ -7,11 +7,11 @@
 
         <variable
             name="model"
-            type="com.project.blejder.everycounter.list.ListCellCounterViewModel"/>
+            type="com.project.blejder.everycounter.list.viewmodels.ListCellCounterViewModel"/>
 
         <variable
             name="handler"
-            type="com.project.blejder.everycounter.list.ListCellCounterHandler"/>
+            type="com.project.blejder.everycounter.list.viewhandlers.ListCellCounterHandler"/>
     </data>
 
     <LinearLayout
