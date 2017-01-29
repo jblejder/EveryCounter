@@ -6,13 +6,17 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.project.blejder.everycounter.databinding.BaseFragmentBinding;
+
 public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment {
 
-    public T binding;
+    public    T                   binding;
+    protected BaseFragmentBinding baseBinding;
 
     @LayoutRes
     protected abstract int getLayoutId();
@@ -23,8 +27,25 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        baseBinding = BaseFragmentBinding.inflate(inflater);
         binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
+        baseBinding.baseContainer.addView(binding.getRoot());
         this.onCreateView(savedInstanceState);
-        return binding.getRoot();
+        return baseBinding.getRoot();
+    }
+
+    protected void openFragment(Fragment fragment) {
+        FragmentManager fm = getChildFragmentManager();
+        fm.beginTransaction().add(baseBinding.baseContainer.getId(), fragment).addToBackStack(null)
+                .commit();
+    }
+
+    public boolean handleOnBackPress() {
+        FragmentManager fm = getChildFragmentManager();
+        if (fm.getBackStackEntryCount() > 0) {
+            fm.popBackStack();
+            return true;
+        }
+        return false;
     }
 }

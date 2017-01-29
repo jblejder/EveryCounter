@@ -7,15 +7,18 @@ import android.support.v4.content.SharedPreferencesCompat;
 
 import com.google.common.base.Optional;
 import com.google.gson.Gson;
-import com.project.blejder.everycounter.EveryCounterApp;
+import com.project.blejder.everycounter.App;
 import com.project.blejder.everycounter.shared.Constants;
+
+import javax.inject.Inject;
 
 public class Storage {
 
     private SharedPreferences prefs;
 
-    public Storage() {
-        prefs = EveryCounterApp.instance
+    @Inject
+    public Storage(Context app) {
+        prefs = app
                 .getSharedPreferences(Constants.USER_PREFS, Context.MODE_PRIVATE);
     }
 

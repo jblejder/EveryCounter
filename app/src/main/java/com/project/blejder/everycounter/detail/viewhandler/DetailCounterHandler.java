@@ -8,4 +8,16 @@ public interface DetailCounterHandler {
     void changeSign();
 
     void openList();
+
+    void loadPrevious();
+
+    void loadNext();
+
+    void setName();
+
+    void setValue();
+
+    void setIncrement();
+
+    void setLimit();
 }

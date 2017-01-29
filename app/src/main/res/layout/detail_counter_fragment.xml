@@ -16,52 +16,73 @@
         <import type="com.project.blejder.everycounter.Fonts"/>
     </data>
 
-    <RelativeLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
-        android:onClick="@{(v) -> handler.increment()}"
-        android:orientation="vertical">
+        android:background="@color/colorPrimary">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text='@{model.name.or("nazwa")}'
-            android:typeface="@{Fonts.roboto.light}"
-            tools:text="counter name"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="@{(v) -> handler.increment()}"
+            android:orientation="vertical"
+            android:padding="@dimen/small_size">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@{model.value}"
-            android:textSize="100sp"
-            android:typeface="@{Fonts.roboto.thin}"
-            app:decimal="@{2}"
-            tools:text="128"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:gravity="center">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+                <ImageButton
+                    style="@style/RippleImageButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{(v) -> handler.loadPrevious()}"
+                    android:src="@drawable/ic_arrow_left"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{model.name.or("nazwa")}'
+                    android:typeface="@{Fonts.roboto.light}"
+                    tools:text="counter name"/>
+
+                <ImageButton
+                    style="@style/RippleImageButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_arrow_right"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@{model.value}"
+                android:textSize="100sp"
+                android:typeface="@{Fonts.roboto.thin}"
+                app:decimal="@{2}"
+                tools:text="128"/>
+        </RelativeLayout>
+
+        <FrameLayout
+            android:id="@+id/bottom_sheet_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true">
+            android:background="@color/colorAccent"
+            android:elevation="10dp"
+            app:behavior_peekHeight="70dp"
+            app:layout_behavior="@string/bottom_sheet_behavior"
+            tools:behavior_peekHeight="500dp">
 
-            <ImageButton
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:onClick="@{(v) -> handler.changeSign()}"
-                android:src="@{model.sign.icon}"
-                tools:src="@drawable/ic_plus"/>
-
-            <ImageButton
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:onClick="@{(v) -> handler.openList()}"
-                android:src="@drawable/ic_list"/>
-
-        </LinearLayout>
-    </RelativeLayout>
+            <include
+                android:id="@+id/bottom_sheet_inner_layout"
+                layout="@layout/detail_counter_bottom_sheet"
+                app:handler="@{handler}"
+                app:model="@{model}"/>
+        </FrameLayout>
+    </android.support.design.widget.CoordinatorLayout>
 </layout>

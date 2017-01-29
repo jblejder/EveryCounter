@@ -1,49 +1,39 @@
 package com.project.blejder.everycounter.main.activities;
 
-import android.databinding.DataBindingUtil;
+import android.databinding.ObservableList;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
 
-import com.project.blejder.everycounter.R;
-import com.project.blejder.everycounter.databinding.MainActivityBinding;
+import com.project.blejder.everycounter.CounterModel;
 import com.project.blejder.everycounter.detail.fragments.DetailCounterFragment;
-import com.project.blejder.everycounter.list.fragments.ListCountersFragment;
+import com.project.blejder.everycounter.list.callbacks.ListCountersFragmentsCallback;
 import com.project.blejder.everycounter.main.dagger.DaggerMainComponent;
 import com.project.blejder.everycounter.main.dagger.MainComponent;
 import com.project.blejder.everycounter.main.viewmodels.MainViewModel;
+import com.project.blejder.everycounter.shared.fragments.BaseActivity;
 
 import javax.inject.Inject;
 
-public class MainActivity extends AppCompatActivity {
-
-    private MainActivityBinding binding;
+public class MainActivity extends BaseActivity implements ListCountersFragmentsCallback {
 
     @Inject
     MainViewModel viewModel;
-    public MainComponent mainComponent = DaggerMainComponent.create();
+
+    private MainComponent mainComponent = DaggerMainComponent.create();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.binding = DataBindingUtil.setContentView(this, R.layout.main_activity);
 
         mainComponent.inject(this);
 
-        if (this.viewModel.counters.size() == 0) {
-            loadFragment(DetailCounterFragment.newInstance());
-        } else {
-            loadFragment(ListCountersFragment.newInstance());
-        }
+        viewModel.load();
+
+        super.loadFragment(DetailCounterFragment.newInstance());
     }
 
-    private void loadFragment(Fragment fragment) {
-        FragmentManager     fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-
-        ft.replace(this.binding.mainFragmentContainer.getId(), fragment);
-        ft.commit();
+    @Override
+    public ObservableList<CounterModel> getCounters() {
+        return viewModel.counters;
     }
 }

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.project.blejder.everycounter.detail.viewmodels.DetailCounterViewModel"/>
+
+        <variable
+            name="handler"
+            type="com.project.blejder.everycounter.detail.viewhandler.DetailCounterHandler"/>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:background="@color/colorAccent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                style="@style/RippleImageButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:onClick="@{(v) -> handler.changeSign()}"
+                android:src="@{model.sign.icon}"
+                tools:src="@drawable/ic_plus"/>
+
+            <android.support.v4.widget.Space
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"/>
+
+            <ImageButton
+                style="@style/RippleImageButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:onClick="@{(v) -> handler.openList()}"
+                android:src="@drawable/ic_list"/>
+        </LinearLayout>
+
+        <android.support.v4.widget.Space
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{(v) -> handler.setName()}"
+                android:text="@string/detail_rename"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{(v) -> handler.setValue()}"
+                android:src="@drawable/ic_list"
+                android:text="@string/detail_value"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{(v) -> handler.setIncrement()}"
+                android:src="@drawable/ic_list"
+                android:text="@string/detail_increment"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{(v) -> handler.setLimit()}"
+                android:src="@drawable/ic_list"
+                android:text="@string/detail_limit"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

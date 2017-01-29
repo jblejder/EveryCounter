@@ -6,6 +6,19 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
         <item name="android:textColor">@color/textMainColor</item>
+
+        <item name="android:imageButtonStyle">@style/RippleImageButton</item>
+        <item name="android:buttonStyle">@style/RippleTextButton</item>
     </style>
+
+    <style name="RippleTextButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_ripple_effect</item>
+    </style>
+
+    <style name="RippleImageButton" parent="Widget.AppCompat.ImageButton">
+        <item name="android:background">@drawable/button_ripple_effect</item>
+    </style>
+
 </resources>

@@ -4,7 +4,6 @@ import android.databinding.ObservableField;
 import android.util.Log;
 
 import com.google.common.base.Optional;
-import com.project.blejder.everycounter.main.viewmodels.MainViewModel;
 import com.project.blejder.everycounter.shared.models.Sign;
 
 import javax.inject.Inject;
@@ -25,7 +24,7 @@ public class DetailCounterViewModel {
     }
 
     @Inject
-    public DetailCounterViewModel(MainViewModel viewModel) {
+    public DetailCounterViewModel() {
         Log.d("qwe", "DetailCounterViewModel: qwe");
     }
 
