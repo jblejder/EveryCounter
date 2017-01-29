@@ -2,10 +2,11 @@ package com.project.blejder.everycounter.main.services;
 
 import com.project.blejder.everycounter.CounterModel;
 
-import org.jdeferred.Promise;
-
 import java.util.List;
 
+import io.reactivex.Observable;
+
 public interface MainService {
-    Promise<List<CounterModel>, Void, Void> getData();
+
+    Observable<List<CounterModel>> getCounters();
 }

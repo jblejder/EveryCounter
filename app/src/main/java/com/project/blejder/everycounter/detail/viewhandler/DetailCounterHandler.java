@@ -20,4 +20,5 @@ public interface DetailCounterHandler {
     void setIncrement();
 
     void setLimit();
+
 }

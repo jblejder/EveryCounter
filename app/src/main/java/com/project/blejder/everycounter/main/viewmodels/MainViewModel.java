@@ -4,38 +4,42 @@ import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
 
 import com.project.blejder.everycounter.CounterModel;
-import com.project.blejder.everycounter.main.services.imp.MainServiceImp;
-
-import org.jdeferred.Promise;
+import com.project.blejder.everycounter.main.services.imp.CounterServiceImp;
+import com.project.blejder.everycounter.shared.utils.RxObserver;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
 import dagger.Lazy;
+import timber.log.Timber;
 
 public class MainViewModel {
 
     public ObservableList<CounterModel> counters;
 
-    private Lazy<MainServiceImp> mainService;
+    private Lazy<CounterServiceImp> mainService;
 
     {
         counters = new ObservableArrayList<>();
     }
 
     @Inject
-    public MainViewModel(Lazy<MainServiceImp> mainService) {
+    MainViewModel(Lazy<CounterServiceImp> mainService) {
         this.mainService = mainService;
     }
 
-    public Promise<List<CounterModel>, Void, Void> load() {
-        return mainService.get().getData().then(result -> {
-            if (result.size() == 0) {
-                result.add(new CounterModel());
-                counters.clear();
-                counters.addAll(result);
-            }
-        });
+    public void load() {
+        Timber.d("load");
+        mainService.get().getCounters().subscribe(new OnLoadObserver());
+    }
+
+    private class OnLoadObserver extends RxObserver<List<CounterModel>> {
+
+        @Override
+        public void onNext(List<CounterModel> resultCounters) {
+            counters.clear();
+            counters.addAll(resultCounters);
+        }
     }
 }

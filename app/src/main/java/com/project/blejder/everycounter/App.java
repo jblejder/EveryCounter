@@ -6,17 +6,23 @@ import com.project.blejder.everycounter.shared.dagger.AppComponent;
 import com.project.blejder.everycounter.shared.dagger.DaggerAppComponent;
 import com.project.blejder.everycounter.shared.dagger.modules.AppModule;
 
+import timber.log.Timber;
+
 public class App extends Application {
 
-    private static AppComponent appComponent;
+    private AppComponent appComponent;
 
-    public static AppComponent getAppComponent() {
+    public AppComponent getAppComponent() {
         return appComponent;
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+        }
 
         Fonts.initialize(getAssets());
         appComponent = DaggerAppComponent.builder().appModule(new AppModule(this)).build();

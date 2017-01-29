@@ -1,7 +1,7 @@
 package com.project.blejder.everycounter.shared.dagger;
 
 import com.project.blejder.everycounter.App;
-import com.project.blejder.everycounter.list.fragments.ListCountersFragment;
+import com.project.blejder.everycounter.detail.fragments.DetailCounterFragment;
 import com.project.blejder.everycounter.shared.dagger.modules.AppModule;
 
 import dagger.Component;
@@ -10,4 +10,6 @@ import dagger.Component;
 public interface AppComponent {
 
     App provideApp();
+
+    void inject(DetailCounterFragment detailCounterFragment);
 }

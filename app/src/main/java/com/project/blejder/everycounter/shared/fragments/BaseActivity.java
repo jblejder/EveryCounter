@@ -6,8 +6,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
+import com.project.blejder.everycounter.App;
 import com.project.blejder.everycounter.R;
 import com.project.blejder.everycounter.databinding.MainActivityBinding;
+import com.project.blejder.everycounter.shared.dagger.AppComponent;
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -33,5 +35,9 @@ public class BaseActivity extends AppCompatActivity {
         if (!handled) {
             super.onBackPressed();
         }
+    }
+
+    public AppComponent getAppComponent() {
+        return ((App) getApplication()).getAppComponent();
     }
 }

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.project.blejder.everycounter.databinding.BaseFragmentBinding;
+import com.project.blejder.everycounter.shared.dagger.AppComponent;
 
 public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment {
 
@@ -34,7 +35,7 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment {
         return baseBinding.getRoot();
     }
 
-    protected void openFragment(Fragment fragment) {
+    public void openFragment(Fragment fragment) {
         FragmentManager fm = getChildFragmentManager();
         fm.beginTransaction().add(baseBinding.baseContainer.getId(), fragment).addToBackStack(null)
                 .commit();
@@ -47,5 +48,9 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment {
             return true;
         }
         return false;
+    }
+
+    protected AppComponent getAppComponent() {
+        return ((BaseActivity) getActivity()).getAppComponent();
     }
 }
