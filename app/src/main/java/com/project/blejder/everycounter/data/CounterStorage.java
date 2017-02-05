@@ -2,10 +2,10 @@ package com.project.blejder.everycounter.data;
 
 import android.util.SparseArray;
 
-import com.project.blejder.everycounter.CounterModel;
+import com.project.blejder.everycounter.data.exceptions.NotFoundException;
+import com.project.blejder.everycounter.domain.models.CounterModel;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +25,7 @@ public class CounterStorage {
     }
 
     public List<CounterModel> getCounters() {
-        return new ArrayList<CounterModel>(counterModels.values());
+        return new ArrayList<>(counterModels.values());
     }
 
     public CounterModel getCounter(Integer id) throws NotFoundException {

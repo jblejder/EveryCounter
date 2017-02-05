@@ -6,11 +6,11 @@
 
         <variable
             name="model"
-            type="com.project.blejder.everycounter.detail.viewmodels.DetailCounterViewModel"/>
+            type="com.project.blejder.everycounter.presentation.detail.viewmodels.DetailCounterViewModel"/>
 
         <variable
             name="handler"
-            type="com.project.blejder.everycounter.detail.viewhandler.DetailCounterHandler"/>
+            type="com.project.blejder.everycounter.presentation.detail.viewhandler.DetailCounterHandler"/>
 
     </data>
 

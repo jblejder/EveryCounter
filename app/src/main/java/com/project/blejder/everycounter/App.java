@@ -2,9 +2,9 @@ package com.project.blejder.everycounter;
 
 import android.app.Application;
 
-import com.project.blejder.everycounter.shared.dagger.AppComponent;
-import com.project.blejder.everycounter.shared.dagger.DaggerAppComponent;
-import com.project.blejder.everycounter.shared.dagger.modules.AppModule;
+import com.project.blejder.everycounter.presentation.shared.dagger.AppComponent;
+import com.project.blejder.everycounter.presentation.shared.dagger.DaggerAppComponent;
+import com.project.blejder.everycounter.presentation.shared.dagger.modules.AppModule;
 
 import timber.log.Timber;
 
